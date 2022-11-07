@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoices;
 use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
     public function index()
     {
-        $test = "przekazana lista faktur";
-        return view('invoices.index', ['name' => $test]);
+        $invoices = Invoices::all();
+        return view('invoices.index', ['name' => $invoices]);
     }
     public function create()
     {
