@@ -52,6 +52,17 @@ class InvoicesController extends Controller
 
         $invoice->save();
 
-        return redirect()->route('invoices.index')->with('message', 'Faktura została zedytowana');
+        return redirect()->route('invoices.index')->with('message', 'Faktura została poprawnie z edytowana');
+    }
+
+    public function delete($id)
+    {
+        //dd($request); zatrzymuje program i pokazuje co jest w zmiennej
+
+        $invoice = Invoices::find($id);
+        $invoice->delete();
+
+        //Invoices::destroy($id); <-- inna możliwość usunięcia rekordu z bazy
+        return redirect()->route('invoices.index')->with('message', 'Faktura została poprawnie usunieta');
     }
 }

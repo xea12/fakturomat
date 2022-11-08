@@ -22,8 +22,9 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form action="{{ route('invoices.update', ['id' => $invoice->id]) }}" method="PUT" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <form action="{{ route('invoices.update', ['id' => $invoice->id]) }}" method="POST" id="contactForm" data-sb-form-api-token="API_TOKEN">
                             {{ csrf_field() }}  <!-- sprawdza czy formularz nie jest wysyłany z innej strony  -->
+                            @method('PUT')
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input value="{{ $invoice->number }}" class="form-control" id="number" name="number" type="text" placeholder="Wpisz nr faktury" required="required" />
@@ -38,18 +39,6 @@
                             <div class="form-floating mb-3">
                                 <input value="{{ $invoice->total }}" class="form-control" id="total" name="total" type="text" placeholder="kwota faktury" required="required" />
                                 <label for="total">Kwota faktury</label>
-                            </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
                             </div>
                             <!-- Submit error message-->
                             <!---->
