@@ -17,6 +17,14 @@ class InvoicesController extends Controller
         return view('invoices.create');
     }
 
+    public function edit($id)
+    {
+        $invoice = Invoices::find($id);
+
+        return view('invoices.edit', ['invoice' => $invoice]);
+    }
+
+
     public function store(Request $request)
     {
         //dd($request); zatrzymuje program i pokazuje co jest w zmiennej
@@ -29,6 +37,21 @@ class InvoicesController extends Controller
 
         $invoice->save();
 
-        return redirect()->route('invoices.index');
+        return redirect()->route('invoices.index')->with('message', 'Nowa faktura została dodana');
+    }
+
+    public function update($id, Request $request)
+    {
+        //dd($request); zatrzymuje program i pokazuje co jest w zmiennej
+
+        $invoice = Invoices::find($id);
+
+        $invoice->number = $request->number;
+        $invoice->date = $request->date;
+        $invoice->total = $request->total;
+
+        $invoice->save();
+
+        return redirect()->route('invoices.index')->with('message', 'Faktura została zedytowana');
     }
 }
