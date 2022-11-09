@@ -26,6 +26,17 @@
                             {{ csrf_field() }}  <!-- sprawdza czy formularz nie jest wysyłany z innej strony  -->
                             <!-- Name input-->
                             <div class="form-floating mb-3">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="inputGroupSelect01">Wybierz klienta</label>
+                                    <select name="customer" class="form-select" id="inputGroupSelect01">
+                                      <option selected>Wybierz...</option>
+                                      @foreach (\App\Models\Customer::all() as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>                                          
+                                      @endforeach
+                                    </select>
+                                  </div>
+                            </div>
+                            <div class="form-floating mb-3">
                                 <input class="form-control" id="number" name="number" type="text" placeholder="Wpisz nr faktury" required="required" />
                                 <label for="number">Nazwa faktury</label>
                             </div>

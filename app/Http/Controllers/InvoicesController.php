@@ -9,7 +9,7 @@ class InvoicesController extends Controller
 {
     public function index()
     {
-        $invoices = Invoices::all();
+        $invoices = Invoices::with('customer')->get();
         return view('invoices.index', ['invoices' => $invoices]);
     }
     public function create()
@@ -34,7 +34,7 @@ class InvoicesController extends Controller
         $invoice->number = $request->number;
         $invoice->date = $request->date;
         $invoice->total = $request->total;
-
+        $invoice->customer_id = $request->customer;
         $invoice->save();
 
         return redirect()->route('invoices.index')->with('message', 'Nowa faktura została dodana');
