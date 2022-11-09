@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Invoices;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -14,8 +15,8 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $cusomer = Customer::all();
-        return view('customers.index', ['customers' => $cusomer]);
+        $customer = Customer::all();
+        return view('customers.index', ['customers' => $customer]);
     }
 
     /**
@@ -36,13 +37,13 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        $cusomer = new Customer();
+        $customer = new Customer();
 
-        $cusomer->name = $request->name;
-        $cusomer->adress = $request->adress;
-        $cusomer->nip = $request->nip;
+        $customer->name = $request->name;
+        $customer->adress = $request->adress;
+        $customer->nip = $request->nip;
 
-        $cusomer->save();
+        $customer->save();
 
         return redirect()->route('customers.index')->with('message', 'Nowa klient został dodany');
     }
@@ -55,7 +56,10 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::with('invoices')->where('id', $id)->firstOrFail();
+
+        return view('customers.single', ['customer' => $customer]);
+
     }
 
     /**
@@ -66,9 +70,9 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        $cusomer = Customer::find($id);
+        $customer = Customer::find($id);
         
-        return view('customers.edit', ['customer' => $cusomer]);
+        return view('customers.edit', ['customer' => $customer]);
     }
 
     /**
@@ -80,13 +84,13 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cusomer = Customer::find($id);
+        $customer = Customer::find($id);
         //dd($request);
-        $cusomer->name = $request->name;
-        $cusomer->adress = $request->adress;
-        $cusomer->nip = $request->nip;
+        $customer->name = $request->name;
+        $customer->adress = $request->adress;
+        $customer->nip = $request->nip;
 
-        $cusomer->save();
+        $customer->save();
 
         return redirect()->route('customers.index')->with('message', 'Nadpisano dane klienta');
     }

@@ -34,7 +34,7 @@
               @foreach ($customers as $customer)
               <tr>
                 <th scope="row">{{ $customer -> id }}</th>
-                <td>{{ $customer -> name }}</td>
+                <td><a href="{{ route('customers.show', ['klienci' => $customer->id]) }}">{{ $customer -> name }}</a></td>
                 <td>{{ $customer -> adress }}</td>
                 <td>{{ $customer -> nip }}</td>
                 <td style="display: flex">
