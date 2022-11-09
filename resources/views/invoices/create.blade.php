@@ -12,6 +12,15 @@
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
@@ -29,7 +38,7 @@
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="inputGroupSelect01">Wybierz klienta</label>
                                     <select name="customer" class="form-select" id="inputGroupSelect01">
-                                      <option selected>Wybierz...</option>
+                                      <option selected></option>
                                       @foreach (\App\Models\Customer::all() as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>                                          
                                       @endforeach
@@ -37,17 +46,17 @@
                                   </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="number" name="number" type="text" placeholder="Wpisz nr faktury" required="required" />
+                                <input class="form-control" id="number" name="number" value="{{ old('number') }}" type="text" placeholder="Wpisz nr faktury"/>
                                 <label for="number">Nazwa faktury</label>
                             </div>
                             <!-- Date address input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="date" name="date" type="text" placeholder="wpisz date" required="required" />
+                                <input class="form-control" id="date" name="date" value="{{ old('date') }}" type="text" placeholder="wpisz date" />
                                 <label for="date">Data wystawienia w formacie (rrrr-mm-dd)</label>
                             </div>
                             <!-- Total number input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="total" name="total" type="text" placeholder="kwota faktury" required="required" />
+                                <input class="form-control" id="total" name="total" value="{{ old('namtotale') }}" type="text" placeholder="kwota faktury"/>
                                 <label for="total">Kwota faktury</label>
                             </div>
                             <!-- Submit success message-->

@@ -12,6 +12,16 @@
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
@@ -24,19 +34,19 @@
                         <!-- to get an API token!-->
                         <form action="{{ route('customers.store') }}" method="POST" id="contactForm" data-sb-form-api-token="API_TOKEN">
                             {{ csrf_field() }}  <!-- sprawdza czy formularz nie jest wysyłany z innej strony  -->
-                            <!-- Name input-->
+                            <!-- Name input  required="required"-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="name" name="name" type="text" placeholder="Wpisz nazwę klienta" required="required" />
+                                <input class="form-control" id="name" name="name" value="{{ old('name') }}" type="text" placeholder="Wpisz nazwę klienta" />
                                 <label for="name">Nazwa klienta</label>
                             </div>
-                            <!-- Date address input-->
+                            <!-- Date address input required="required"-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="adress" name="adress" type="text" placeholder="Wpisz adres klienta" required="required" />
+                                <input class="form-control" id="adress" name="adress" value="{{ old('adress') }}" type="text" placeholder="Wpisz adres klienta"  />
                                 <label for="adress">Adress klienta</label>
                             </div>
                             <!-- Total number input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="nip" name="nip" type="text" placeholder="Podaj NIP klienta" required="required" />
+                                <input class="form-control" id="nip" name="nip" value="{{ old('nip') }}" type="text" placeholder="Podaj NIP klienta" />
                                 <label for="nip">NIP</label>
                             </div>
 

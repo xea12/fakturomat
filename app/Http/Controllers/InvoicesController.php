@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InvoiceStoreRequest;
 use App\Models\Invoices;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class InvoicesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(InvoiceStoreRequest $request)
     {
         //dd($request); zatrzymuje program i pokazuje co jest w zmiennej
 
