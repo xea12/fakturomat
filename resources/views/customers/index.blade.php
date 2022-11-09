@@ -37,12 +37,17 @@
                 <td>{{ $customer -> name }}</td>
                 <td>{{ $customer -> adress }}</td>
                 <td>{{ $customer -> nip }}</td>
-                <td><a href="{{ route('customers.edit', ['klienci' => $customer->id]) }}" class = "btn btn-primary">Edytuj</a>
-                <form method="POST" action="{{ route('customers.destroy', ['klienci' => $customer->id]) }}">
+                <td style="display: flex">
+                  <form method="GET" action="{{ route('customers.edit', ['klienci' => $customer->id]) }}">
+                    @csrf
+                    <button type="submit" class = "btn btn-primary">Edytuj</button>
+                  </form>
+                  <form method="POST" action="{{ route('customers.destroy', ['klienci' => $customer->id]) }}">
                     @csrf
                     @method('delete')
                     <button type="submit" class = "btn btn-danger">Usuń</button>
-                </form></td>
+                  </form>
+                </td>
               </tr>
               @endforeach  
             </tbody>

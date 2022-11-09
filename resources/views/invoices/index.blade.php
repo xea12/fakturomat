@@ -37,12 +37,18 @@
                 <td>{{ $invoice -> number }}</td>
                 <td>{{ $invoice -> date }}</td>
                 <td>{{ $invoice -> total }}</td>
-                <td><a href="{{ route('invoices.edit', ['id' => $invoice->id]) }}" class = "btn btn-primary">Edytuj</a>
-                <form method="POST" action="{{ route('invoices.delete', ['id' => $invoice->id]) }}">
+                
+                <td style="display: flex">
+                  <form method="GET" action="{{ route('invoices.edit', ['id' => $invoice->id]) }}">
+                    @csrf
+                    <button type="submit" class = "btn btn-primary">Edytuj</button>
+                  </form>
+                  <form method="POST" action="{{ route('invoices.delete', ['id' => $invoice->id]) }}">
                     @csrf
                     @method('delete')
                     <button type="submit" class = "btn btn-danger">Usuń</button>
-                </form></td>
+                  </form>
+                </td>
               </tr>
               @endforeach  
             </tbody>
